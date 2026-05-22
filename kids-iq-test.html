@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full scroll-smooth">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MT7PFKPM');</script>
+<!-- End Google Tag Manager -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Free IQ Test for Kids – Children's Online Cognitive Test</title>
@@ -159,6 +166,10 @@
   </style>
 </head>
 <body class="bg-[#0b1329] text-slate-100 min-h-full font-sans antialiased flex flex-col selection:bg-brand-500 selection:text-white">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MT7PFKPM"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
   <!-- Static Landing Content -->
   <div id="landing-page-content" class="flex-grow flex flex-col justify-between min-h-screen no-print">
@@ -518,6 +529,8 @@
 
       useEffect(() => {
         window.startQuiz = () => {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({'event': 'quiz_started', 'quiz_name': 'kids-iq-test'});
           setScreen('quiz');
           setQuestionIndex(0);
           setAnswers({});
@@ -582,6 +595,8 @@
           const calculatedIq = 70 + (numCorrect * 8);
 
           setIqScore(calculatedIq);
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({'event': 'quiz_completed', 'quiz_name': 'kids-iq-test', 'score': calculatedIq});
           persistState('loading', questionIndex, updatedAnswers, calculatedIq, userName);
         }
       };
@@ -798,6 +813,8 @@
       const percentile = getPercentile(score);
 
       const triggerPrint = () => {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({'event': 'certificate_downloaded', 'quiz_name': 'kids-iq-test', 'score': score});
         document.getElementById('cert-user-name').innerText = userName.trim() || 'Young Thinker';
         document.getElementById('cert-date').innerText = dateString;
         document.getElementById('cert-iq-score').innerText = score;
