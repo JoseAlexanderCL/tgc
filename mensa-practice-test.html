@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mensa Practice Test – Free Mensa IQ Practice Puzzles</title>
+  <meta name="description" content="Take a free Mensa practice test online. Challenge your brain with 12 advanced logic matrix puzzles and pattern completion questions. Instant results.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#faf5ff',
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+              300: '#d8b4fe',
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7e22ce',
+              800: '#6b21a8',
+              900: '#581c87',
+              950: '#1a0933', // purple theme
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Outfit', 'sans-serif'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'spin-slow': 'spin 12s linear infinite',
+            'radar': 'radar-scan 3s linear infinite',
+            'float': 'float-bubble 6s ease-in-out infinite',
+          },
+          keyframes: {
+            'radar-scan': {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(360deg)' },
+            },
+            'float-bubble': {
+              '0%, 100%': { transform: 'translateY(0px) scale(1)' },
+              '50%': { transform: 'translateY(-10px) scale(1.03)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Import Map -->
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@18.2.0",
+        "react-dom": "https://esm.sh/react-dom@18.2.0",
+        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+        "lucide-react": "https://esm.sh/lucide-react@0.344.0"
+      }
+    }
+  </script>
+
+  <!-- Babel Standalone compiler -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "TheGeniusCheck Mensa Practice Test",
+    "url": "http://localhost:8000/mensa-practice-test.html",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "All",
+    "description": "An advanced 12-question logical, spatial, and mathematical IQ test simulating the difficulty profile of the official Mensa admission exams.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is this an official Mensa admission test?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, this is a practice simulation designed to challenge users with logic puzzles matching the format and complexity of official Mensa tests."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What score do I need to qualify for Mensa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Official Mensa admission requires scoring in the top 2% of the population, which corresponds to an IQ of 130 or higher (standard deviation 15) on standard tests."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style type="text/css">
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d0614;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #251236;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3c1e54;
+    }
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      body > div:first-child {
+        display: none !important;
+      }
+      #print-certificate-container {
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#0c0517] text-slate-100 min-h-full font-sans antialiased flex flex-col selection:bg-brand-500 selection:text-white">
+
+  <!-- Static Landing Content -->
+  <div id="landing-page-content" class="flex-grow flex flex-col justify-between min-h-screen no-print">
+    <!-- Header -->
+    <header class="border-b border-slate-900 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2 select-none">
+          <div class="p-2 bg-gradient-to-tr from-brand-600 to-indigo-500 rounded-xl shadow-[0_0_12px_rgba(168,85,247,0.3)]">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1 0-3.12 3 3 0 0 1 0-4.88 2.5 2.5 0 0 1 0-3.12A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 0-3.12 3 3 0 0 0 0-4.88 2.5 2.5 0 0 0 0-3.12A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+          </div>
+          <span class="font-heading font-extrabold text-xl tracking-tight bg-gradient-to-r from-white via-indigo-200 to-brand-400 bg-clip-text text-transparent">
+            TheGeniusCheck
+          </span>
+        </a>
+        
+        <nav class="hidden md:flex items-center gap-6">
+          <a href="index.html" class="text-sm font-semibold text-slate-300 hover:text-white transition">Free IQ Test</a>
+          <a href="culture-fair-iq-test.html" class="text-sm font-semibold text-slate-300 hover:text-white transition">Culture-Fair Test</a>
+          <a href="kids-iq-test.html" class="text-sm font-semibold text-slate-300 hover:text-white transition">Kids Test</a>
+          <a href="mensa-practice-test.html" class="text-sm font-semibold text-brand-400 hover:text-brand-300 transition">Mensa Practice</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 bg-brand-500/10 border border-brand-500/20 rounded-full text-xs font-semibold text-brand-400">
+            Validated Assessment
+          </span>
+          <!-- Mobile Hamburger Menu Button -->
+          <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-400 hover:text-white focus:outline-none" aria-label="Toggle menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Navigation Menu Container -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-slate-900 bg-slate-950/95 backdrop-blur-md transition-all duration-200">
+        <div class="px-4 py-4 flex flex-col gap-3 font-semibold text-sm">
+          <a href="index.html" class="text-slate-300 hover:text-white py-1 transition">Free IQ Test</a>
+          <a href="culture-fair-iq-test.html" class="text-slate-300 hover:text-white py-1 transition">Culture-Fair Test</a>
+          <a href="kids-iq-test.html" class="text-slate-300 hover:text-white py-1 transition">Kids Test</a>
+          <a href="mensa-practice-test.html" class="text-brand-400 hover:text-brand-300 py-1 transition">Mensa Practice</a>
+          <div class="border-t border-slate-900 my-2 pt-2 text-xs text-slate-500 font-bold uppercase tracking-wider">Resources</div>
+          <a href="best-free-iq-tests.html" class="text-slate-400 hover:text-white py-1 transition font-medium">Best Free IQ Tests</a>
+          <a href="how-accurate-are-online-iq-tests.html" class="text-slate-400 hover:text-white py-1 transition font-medium">Accuracy of Online Tests</a>
+          <a href="what-is-a-good-iq-score.html" class="text-slate-400 hover:text-white py-1 transition font-medium">What is a Good IQ Score?</a>
+          <a href="kids-iq-test-guide.html" class="text-slate-400 hover:text-white py-1 transition font-medium">Kids IQ Testing Guide</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Body -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 flex flex-col justify-center items-center">
+      <!-- Breadcrumbs -->
+      <nav class="w-full flex justify-start mb-6 text-xs text-slate-500 font-semibold uppercase tracking-wider" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-2">
+          <li class="inline-flex items-center">
+            <a href="index.html" class="hover:text-slate-300">Home</a>
+          </li>
+          <li>
+            <span class="mx-2 text-slate-600">/</span>
+            <a href="mensa-practice-test.html" class="hover:text-slate-300">IQ Tests</a>
+          </li>
+          <li aria-current="page">
+            <span class="mx-2 text-slate-600">/</span>
+            <span class="text-slate-400">Mensa Practice</span>
+          </li>
+        </ol>
+      </nav>
+
+      <div class="max-w-4xl text-center space-y-12 py-6">
+        <div class="relative flex justify-center mb-6">
+          <div class="absolute w-28 h-28 bg-brand-500/20 blur-3xl rounded-full animate-pulse-slow"></div>
+          <div class="p-5 bg-gradient-to-br from-brand-950 to-purple-900 border border-brand-800/40 rounded-3xl shadow-[0_0_50px_rgba(168,85,247,0.15)] relative">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-400 animate-float"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+            <div class="absolute -top-1 -right-1 flex h-4 w-4">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-4 w-4 bg-brand-500"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <h1 class="text-4xl md:text-6xl font-heading font-extrabold tracking-tight leading-none text-white max-w-3xl mx-auto">
+            Mensa Practice Test – <span class="bg-gradient-to-r from-brand-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">Free Mensa IQ Practice Puzzles</span>
+          </h1>
+          <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed">
+            Test your limits with 12 highly advanced mathematical, logical, and spatial reasoning matrices. Free online simulator.
+          </p>
+        </div>
+
+        <div class="flex flex-col items-center gap-3">
+          <button 
+            onclick="if(window.startQuiz) { window.startQuiz(); } else { alert('Loading...'); }"
+            class="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-bold text-lg rounded-2xl shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95 transition-all duration-200"
+          >
+            Start Mensa Practice
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1.5 transition-transform duration-200"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <div class="flex items-center gap-6 mt-2 text-xs font-semibold text-slate-500 uppercase tracking-widest">
+            <span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 12 Mins</span>
+            <span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> 12 Questions</span>
+            <span class="flex items-center gap-1.5"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg> Advanced IQ Certificate</span>
+          </div>
+        </div>
+
+        <div class="border-t border-slate-900 pt-12 text-left space-y-8 max-w-3xl mx-auto">
+          <section class="space-y-4">
+            <h2 class="text-2xl font-heading font-bold text-white">What is a Mensa Practice Test?</h2>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Mensa is the world's oldest and largest high-IQ society. To gain membership, candidates must score in the top 2% of the general population on a supervised, standardized intelligence test (typically equivalent to an IQ of 130 or above). This **mensa practice test** mimics those logic structures, challenging you with 12 advanced matrix reasoning, number sequences, and lexical analogies.
+            </p>
+          </section>
+
+          <section class="space-y-4">
+            <h2 class="text-2xl font-heading font-bold text-white">How the Scoring Calibration Works</h2>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Mensa scales use standard deviation ranges (typically SD 15 or SD 24). Our **mensa iq practice test** scales results between 90 and 150 IQ using a baseline of 90, adding 5 points for every correct answer. If you score 130 or higher, you meet the theoretical threshold representing top 2% cognitive capacity.
+            </p>
+          </section>
+
+          <section class="space-y-4">
+            <h2 class="text-2xl font-heading font-bold text-white">Frequently Asked Questions</h2>
+            <div class="space-y-4">
+              <div class="bg-slate-900/30 border border-slate-900 rounded-xl p-5">
+                <h3 class="font-heading font-semibold text-white text-base">Is this test official?</h3>
+                <p class="text-slate-400 text-sm mt-2 leading-relaxed">
+                  No, this is an educational simulation. While the questions mimic official Mensa difficulty parameters, only supervised proctored tests can grant official society admission.
+                </p>
+              </div>
+              <div class="bg-slate-900/30 border border-slate-900 rounded-xl p-5">
+                <h3 class="font-heading font-semibold text-white text-base">Can I practice to improve my score?</h3>
+                <p class="text-slate-400 text-sm mt-2 leading-relaxed">
+                  Absolutely. Practicing logical matrices, arithmetic sequences, and spatial rotations sharpens fluid logic pathways and mental execution speed.
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-900 bg-slate-950 py-8 text-center text-xs text-slate-500 mt-12">
+      <div class="max-w-6xl mx-auto px-4 space-y-4">
+        <div class="flex justify-center space-x-6">
+          <button onclick="document.getElementById('privacy-modal').classList.remove('hidden')" class="hover:text-slate-300 font-medium transition">Privacy Policy</button>
+          <button onclick="document.getElementById('terms-modal').classList.remove('hidden')" class="hover:text-slate-300 font-medium transition">Terms of Service</button>
+          <button onclick="document.getElementById('contact-modal').classList.remove('hidden')" class="hover:text-slate-300 font-medium transition">Contact Us</button>
+        </div>
+        <p>&copy; 2026 TheGeniusCheck. All rights reserved. Results provided for educational simulation.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modals -->
+  <div id="privacy-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="bg-slate-900 border border-slate-800 max-w-lg w-full rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+      <button onclick="document.getElementById('privacy-modal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 hover:bg-slate-800 rounded-lg transition">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="space-y-4 text-left">
+        <h3 class="text-xl font-heading font-bold text-white">Privacy Policy</h3>
+        <p class="text-slate-400 text-sm">We process all answers inside your browser. No data is stored on our servers.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="terms-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="bg-slate-900 border border-slate-800 max-w-lg w-full rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+      <button onclick="document.getElementById('terms-modal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 hover:bg-slate-800 rounded-lg transition">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="space-y-4 text-left">
+        <h3 class="text-xl font-heading font-bold text-white">Terms of Service</h3>
+        <p class="text-slate-400 text-sm">This test is a simulation for cognitive educational evaluation.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="contact-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="bg-slate-900 border border-slate-800 max-w-lg w-full rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+      <button onclick="document.getElementById('contact-modal').classList.add('hidden')" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 hover:bg-slate-800 rounded-lg transition">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="space-y-4 text-left font-sans">
+        <h3 class="text-xl font-heading font-bold text-white">Contact Us</h3>
+        <p class="text-slate-400 text-sm">Send inquiries to support@thegeniuscheck.com</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- React Container -->
+  <div id="root" class="hidden flex-grow flex flex-col"></div>
+
+  <!-- Print Certificate Container -->
+  <div id="print-certificate-container" class="hidden bg-white text-slate-900 p-8 border-8 border-double border-indigo-950 rounded-lg max-w-4xl mx-auto my-12 relative shadow-2xl">
+    <div class="absolute top-4 left-4 w-12 h-12 border-t-4 border-l-4 border-indigo-950"></div>
+    <div class="absolute top-4 right-4 w-12 h-12 border-t-4 border-r-4 border-indigo-950"></div>
+    <div class="absolute bottom-4 left-4 w-12 h-12 border-b-4 border-l-4 border-indigo-950"></div>
+    <div class="absolute bottom-4 right-4 w-12 h-12 border-b-4 border-r-4 border-indigo-950"></div>
+    <div class="text-center space-y-6">
+      <h1 class="text-4xl font-heading font-bold text-slate-800 uppercase tracking-widest">Certificate of Advanced IQ Profile</h1>
+      <p class="text-slate-500 font-medium tracking-wide">THIS DOCUMENT CONFIRMS THE ASSESSED MENSA-LEVEL IQ SCORE OF</p>
+      <div class="py-4 border-b-2 border-slate-200 max-w-xl mx-auto">
+        <h2 id="cert-user-name" class="text-3xl font-heading font-semibold text-indigo-900 tracking-wider">John Doe</h2>
+      </div>
+      <p class="text-slate-600 max-w-2xl mx-auto text-sm leading-relaxed">
+        Who successfully completed the 12-Question High-Difficulty Mensa Practice logical reasoning matrix on <span id="cert-date" class="font-semibold">May 21, 2026</span>.
+      </p>
+      <div class="grid grid-cols-2 max-w-md mx-auto py-4 bg-slate-50 border border-slate-100 rounded-xl">
+        <div>
+          <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Assessed IQ</div>
+          <div id="cert-iq-score" class="text-4xl font-heading font-black text-indigo-900 mt-1">132</div>
+        </div>
+        <div>
+          <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Percentile</div>
+          <div id="cert-percentile" class="text-4xl font-heading font-black text-indigo-900 mt-1">98th</div>
+        </div>
+      </div>
+      <div class="flex justify-between items-end max-w-2xl mx-auto pt-8 border-t border-slate-100">
+        <div class="text-left space-y-1">
+          <div class="text-indigo-950 font-heading font-bold italic">Dr. Alan Mercer</div>
+          <div class="text-[10px] uppercase font-bold tracking-widest text-slate-400">Board Director, Cognitive Research Inst.</div>
+        </div>
+        <div class="text-right space-y-1">
+          <div class="text-slate-800 font-mono text-xs font-bold tracking-wider">CERTIFICATE ID: TGC-MS-8104</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- React Logic -->
+  <script type="text/babel" data-type="module">
+    import React, { useState, useEffect } from 'react';
+    import ReactDOM from 'react-dom/client';
+    import { 
+      Brain, ArrowRight, Award, CheckCircle2, ChevronRight, Download, 
+      RefreshCw, Sparkles, BarChart3, Info, Clock, Check, HelpCircle
+    } from 'lucide-react';
+
+    // 12 challenging Mensa-level questions
+    const QUESTIONS_POOL = [
+      {
+        id: 1,
+        category: 'Logic/Matrix',
+        text: 'Which number completes the logical grid pattern below?',
+        sequence: 'Row 1:  2  —  4  —  8\nRow 2:  3  —  9  —  27\nRow 3:  4  —  16  —  [ ? ]',
+        options: ['32', '48', '64', '80'],
+        answer: '64',
+        explanation: 'Each row follows the formula: x, x^2, x^3. For the third row: 4, 4^2 = 16, 4^3 = 64.'
+      },
+      {
+        id: 2,
+        category: 'Numerical Sequences',
+        text: 'Identify the next term in this growing factorial sequence:',
+        sequence: '1 — 2 — 6 — 24 — 120 — [ ? ]',
+        options: ['240', '360', '720', '1440'],
+        answer: '720',
+        explanation: 'The sequence is n factorial (n!). 1! = 1, 2! = 2, 3! = 6, 4! = 24, 5! = 120, 6! = 720.'
+      },
+      {
+        id: 3,
+        category: 'Anagram/Verbal',
+        text: 'Rearrange the letters "P O L E D A C" to find a word. What category does it belong to?',
+        options: ['🌍 Country name', '🦁 Wild Animal', '🍎 Sweet Fruit', '🏙️ Major City'],
+        answer: '🦁 Wild Animal',
+        explanation: 'The letters rearrange to form the word "LEOPARD", which belongs to the Wild Animal category.'
+      },
+      {
+        id: 4,
+        category: 'Spatial Deduction',
+        text: 'If Shape A represents a vertical bar and Shape B is a horizontal bar, when combined by a logical OR overlap, what shape is produced?',
+        options: ['➕ A centered cross shape', '➖ A single horizontal line', '┃ A single vertical line', '⬜ A solid square block'],
+        answer: '➕ A centered cross shape',
+        explanation: 'An OR overlap overlays both shapes directly, retaining all active parts, which results in a centered cross.'
+      },
+      {
+        id: 5,
+        category: 'Numerical Logic',
+        text: 'Analyze the formula on these pairs: (5, 3) yields 15, and (8, 7) yields 56. What does (12, 11) yield?',
+        options: ['23', '132', '144', '121'],
+        answer: '132',
+        explanation: 'The function multiplies both numbers: x * y. 12 * 11 = 132.'
+      },
+      {
+        id: 6,
+        category: 'Logic Riddle',
+        text: 'Which letter completes the pattern? O, T, T, F, F, S, S, E, ...',
+        options: ['N', 'T', 'E', 'O'],
+        answer: 'N',
+        explanation: 'These are the first letters of the counting numbers: One, Two, Three, Four, Five, Six, Seven, Eight, Nine (N).'
+      },
+      {
+        id: 7,
+        category: 'Lexical Analogies',
+        text: 'If the word LACK is represented by 8412, what number represents the word CALK?',
+        options: ['2148', '1428', '1482', '4812'],
+        answer: '1482',
+        explanation: 'Mapping letters to numbers: L=8, A=4, C=1, K=2. Thus CALK = C(1) A(4) L(8) K(2) = 1482.'
+      },
+      {
+        id: 8,
+        category: 'Spatial/Temporal',
+        text: 'At exactly 3:15, what is the precise angle between the hour and minute hands of a clock?',
+        options: ['0 degrees', '7.5 degrees', '15 degrees', '22.5 degrees'],
+        answer: '7.5 degrees',
+        explanation: 'At 3:15, the minute hand is at 15 mins (the 3 marker). The hour hand has moved 15/60 = 1/4 of the distance to the 4. Since there are 30 degrees between hour markers, the angle is 30 * 1/4 = 7.5 degrees.'
+      },
+      {
+        id: 9,
+        category: 'Logical Syllogisms',
+        text: 'If all Bloops are Razzies and all Razzies are Lizzies, is the statement "All Bloops are Lizzies" true or false?',
+        options: ['True', 'False', 'Cannot be determined'],
+        answer: 'True',
+        explanation: 'By transitive relation: Bloops ⊂ Razzies ⊂ Lizzies. Therefore, Bloops ⊂ Lizzies, which means the statement is true.'
+      },
+      {
+        id: 10,
+        category: 'Mathematical Series',
+        text: 'What number completes the series? 3, 5, 9, 17, 33, ...',
+        options: ['49', '57', '65', '81'],
+        answer: '65',
+        explanation: 'The difference doubles each step: +2, +4, +8, +16, so the next addition is +32. 33 + 32 = 65. Alternatively, 2*x - 1.'
+      },
+      {
+        id: 11,
+        category: 'Alphabet Scales',
+        text: 'Complete the pattern: B, D, G, K, P, ...',
+        options: ['S', 'T', 'U', 'V'],
+        answer: 'V',
+        explanation: 'The interval increases by 1 each step: B (+2) -> D (+3) -> G (+4) -> K (+5) -> P (+6) -> V.'
+      },
+      {
+        id: 12,
+        category: 'Spatial Logic',
+        text: 'A transparent sheet with a diagonal line is overlaid onto another sheet with a horizontal line. The diagonal goes from bottom-left to top-right. Which shape is formed?',
+        options: ['An X shape', 'An intersecting line segment crossing the diagonal', 'A triangle', 'A circle'],
+        answer: 'An intersecting line segment crossing the diagonal',
+        explanation: 'The lines intersect at a single point, forming crossed lines resembling an intersection segment.'
+      }
+    ];
+
+    function AdPlaceholder({ type }) {
+      const isLeaderboard = type === 'leaderboard';
+      const dims = isLeaderboard ? 'h-[90px] max-w-[728px] w-full' : 'h-[250px] w-[300px]';
+      return (
+        <div className={`mx-auto flex flex-col items-center justify-center bg-slate-900/40 border border-slate-800/80 rounded-xl p-3 select-none no-print my-6 ${dims}`}>
+          <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-widest mb-1 flex items-center gap-1">
+            <Info size={12} /> Advertisement
+          </div>
+          <div className="text-xs text-slate-600 font-mono text-center">
+            {isLeaderboard ? 'Responsive Ad Banner Slot (728x90)' : 'Responsive Square Ad Slot (300x250)'}
+          </div>
+        </div>
+      );
+    }
+
+    function App() {
+      const [screen, setScreen] = useState('landing');
+      const [questionIndex, setQuestionIndex] = useState(0);
+      const [answers, setAnswers] = useState({});
+      const [iqScore, setIqScore] = useState(100);
+      const [userName, setUserName] = useState('');
+
+      useEffect(() => {
+        window.startQuiz = () => {
+          setScreen('quiz');
+          setQuestionIndex(0);
+          setAnswers({});
+          const elLanding = document.getElementById('landing-page-content');
+          const elRoot = document.getElementById('root');
+          if (elLanding) elLanding.classList.add('hidden');
+          if (elRoot) elRoot.classList.remove('hidden');
+          persistState('quiz', 0, {}, 100, '');
+        };
+
+        const storedState = localStorage.getItem('genius_check_mensa_state');
+        if (storedState) {
+          try {
+            const parsed = JSON.parse(storedState);
+            if (parsed.screen && parsed.screen !== 'landing') {
+              setScreen(parsed.screen);
+              setQuestionIndex(parsed.questionIndex || 0);
+              setAnswers(parsed.answers || {});
+              setIqScore(parsed.iqScore || 100);
+              setUserName(parsed.userName || '');
+              
+              const elLanding = document.getElementById('landing-page-content');
+              const elRoot = document.getElementById('root');
+              if (elLanding) elLanding.classList.add('hidden');
+              if (elRoot) elRoot.classList.remove('hidden');
+            }
+          } catch (e) {
+            console.error("Failed to parse state", e);
+          }
+        }
+      }, []);
+
+      const persistState = (newScreen, newIndex, newAnswers, newScore, newName) => {
+        localStorage.setItem('genius_check_mensa_state', JSON.stringify({
+          screen: newScreen,
+          questionIndex: newIndex,
+          answers: newAnswers,
+          iqScore: newScore,
+          userName: newName
+        }));
+      };
+
+      const handleAnswer = (selectedOption) => {
+        const updatedAnswers = { ...answers, [questionIndex]: selectedOption };
+        setAnswers(updatedAnswers);
+        
+        if (questionIndex < QUESTIONS_POOL.length - 1) {
+          const nextIndex = questionIndex + 1;
+          setQuestionIndex(nextIndex);
+          persistState('quiz', nextIndex, updatedAnswers, 100, userName);
+        } else {
+          setScreen('loading');
+          persistState('loading', questionIndex, updatedAnswers, 100, userName);
+          
+          let numCorrect = 0;
+          QUESTIONS_POOL.forEach((q, idx) => {
+            if (updatedAnswers[idx] === q.answer) {
+              numCorrect++;
+            }
+          });
+          // Calibrated: baseline 90, +5 per correct answer = 90 to 150
+          const calculatedIq = 90 + (numCorrect * 5);
+
+          setIqScore(calculatedIq);
+          persistState('loading', questionIndex, updatedAnswers, calculatedIq, userName);
+        }
+      };
+
+      const resetTest = () => {
+        localStorage.removeItem('genius_check_mensa_state');
+        setScreen('landing');
+        setQuestionIndex(0);
+        setAnswers({});
+        setIqScore(100);
+        setUserName('');
+        
+        const elLanding = document.getElementById('landing-page-content');
+        const elRoot = document.getElementById('root');
+        if (elLanding) elLanding.classList.remove('hidden');
+        if (elRoot) elRoot.classList.add('hidden');
+      };
+
+      return (
+        <div className="flex-grow flex flex-col justify-between min-h-screen">
+          <header className="border-b border-slate-900 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40 no-print">
+            <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-2 cursor-pointer select-none" onClick={resetTest}>
+                <div className="p-2 bg-gradient-to-tr from-brand-600 to-indigo-500 rounded-xl">
+                  <Brain size={24} className="text-white" />
+                </div>
+                <span className="font-heading font-extrabold text-xl tracking-tight bg-gradient-to-r from-white via-indigo-200 to-brand-400 bg-clip-text text-transparent">
+                  TheGeniusCheck
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 bg-brand-500/10 border border-brand-500/20 rounded-full text-xs font-semibold text-brand-400">
+                  <CheckCircle2 size={12} /> Mensa Practice Mode
+                </span>
+                {screen === 'quiz' && (
+                  <button onClick={resetTest} className="text-xs font-semibold text-slate-400 hover:text-white px-3 py-1.5 rounded-lg border border-slate-800 hover:bg-slate-900 transition">
+                    Restart
+                  </button>
+                )}
+              </div>
+            </div>
+          </header>
+
+          {screen !== 'loading' && <AdPlaceholder type="leaderboard" />}
+
+          <main className="flex-grow max-w-6xl w-full mx-auto px-4 py-6 flex flex-col justify-center items-center">
+            {screen === 'quiz' && (
+              <QuizScreen 
+                question={QUESTIONS_POOL[questionIndex]} 
+                index={questionIndex} 
+                total={QUESTIONS_POOL.length} 
+                onAnswer={handleAnswer} 
+              />
+            )}
+            {screen === 'loading' && (
+              <LoadingScreen onComplete={() => setScreen('results')} />
+            )}
+            {screen === 'results' && (
+              <ResultsScreen 
+                score={iqScore} 
+                answers={answers} 
+                userName={userName}
+                setUserName={setUserName}
+                onReset={resetTest} 
+              />
+            )}
+          </main>
+
+          <footer className="border-t border-slate-900 bg-slate-950 py-8 no-print text-center text-xs text-slate-500 mt-12">
+            <p>&copy; 2026 TheGeniusCheck. All rights reserved. Results for simulation purposes.</p>
+          </footer>
+        </div>
+      );
+    }
+
+    function QuizScreen({ question, index, total, onAnswer }) {
+      const [selected, setSelected] = useState(null);
+
+      useEffect(() => {
+        setSelected(null);
+      }, [index]);
+
+      const handleOptionClick = (option) => {
+        setSelected(option);
+        setTimeout(() => {
+          onAnswer(option);
+        }, 350);
+      };
+
+      const progressPercent = ((index + 1) / total) * 100;
+
+      return (
+        <div className="max-w-4xl w-full grid grid-cols-1 lg:grid-cols-12 gap-8 py-4 items-start">
+          <div className="lg:col-span-8 space-y-6 w-full">
+            <div className="space-y-3">
+              <div className="flex justify-between items-center text-xs font-semibold text-slate-400 uppercase tracking-widest">
+                <span>Category: <strong className="text-brand-400">{question.category}</strong></span>
+                <span>Question {index + 1} of {total}</span>
+              </div>
+              <div className="h-2 w-full bg-slate-900 rounded-full overflow-hidden border border-slate-800">
+                <div 
+                  className="h-full bg-gradient-to-r from-brand-600 via-indigo-500 to-purple-500 rounded-full transition-all duration-300"
+                  style={{ width: `${progressPercent}%` }}
+                ></div>
+              </div>
+            </div>
+
+            <div className="bg-slate-900/60 border border-slate-800 rounded-2xl p-6 md:p-8 space-y-6 shadow-2xl relative overflow-hidden backdrop-blur-xl">
+              <h2 className="text-xl md:text-2xl font-heading font-bold text-white leading-snug">
+                {question.text}
+              </h2>
+              {question.sequence && (
+                <div className="py-5 px-6 bg-slate-950 border border-slate-800 rounded-xl text-center whitespace-pre-line">
+                  <span className="font-mono text-base md:text-lg font-bold tracking-wide text-brand-300">
+                    {question.sequence}
+                  </span>
+                </div>
+              )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                {question.options.map((option, oIdx) => {
+                  const isSelected = selected === option;
+                  return (
+                    <button
+                      key={oIdx}
+                      onClick={() => handleOptionClick(option)}
+                      disabled={selected !== null}
+                      className={`w-full text-left p-4 rounded-xl border font-medium text-sm md:text-base transition-all duration-200 flex items-center justify-between ${
+                        isSelected 
+                        ? 'bg-brand-600/20 border-brand-500 text-white shadow-[0_0_15px_rgba(168,85,247,0.2)]'
+                        : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:border-slate-700 hover:bg-slate-900/60 hover:text-white'
+                      }`}
+                    >
+                      <span>{option}</span>
+                      <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
+                        isSelected ? 'border-brand-500 bg-brand-500 text-white' : 'border-slate-700 bg-slate-950'
+                      }`}>
+                        {isSelected && <Check size={12} strokeWidth={3} />}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+          <div className="lg:col-span-4 w-full flex flex-col items-center">
+            <AdPlaceholder type="square" />
+          </div>
+        </div>
+      );
+    }
+
+    function LoadingScreen({ onComplete }) {
+      const [scanStep, setScanStep] = useState(0);
+      const messages = [
+        "Analyzing advanced logical matrices...",
+        "Evaluating mathematical sequences...",
+        "Comparing against proctored Mensa benchmarks..."
+      ];
+
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setScanStep(prev => (prev < 2 ? prev + 1 : prev));
+        }, 1300);
+        const timeout = setTimeout(onComplete, 4000);
+        return () => {
+          clearInterval(interval);
+          clearTimeout(timeout);
+        };
+      }, [onComplete]);
+
+      return (
+        <div className="max-w-md w-full text-center py-16 space-y-8 animate-fade-in">
+          <div className="relative w-44 h-44 mx-auto flex items-center justify-center">
+            <div className="absolute inset-0 rounded-full border-2 border-brand-500/10 border-t-brand-400 animate-spin-slow"></div>
+            <div className="p-6 bg-slate-900 border border-slate-800 rounded-full shadow-[0_0_35px_rgba(168,85,247,0.15)]">
+              <Brain size={48} className="text-brand-400 animate-pulse" />
+            </div>
+            <div className="absolute left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-brand-400 to-transparent shadow-[0_0_8px_#a855f7] animate-bounce top-1/2"></div>
+          </div>
+          <div className="space-y-2">
+            <h3 className="text-lg font-heading font-bold text-white">Calculating Mensa Index</h3>
+            <p className="text-sm text-slate-400 h-6 font-mono">{messages[scanStep]}</p>
+          </div>
+        </div>
+      );
+    }
+
+    function ResultsScreen({ score, answers, userName, setUserName, onReset }) {
+      const dateString = new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      let rank = "High Cognitive Capacity";
+      let ratingDescription = "Excellent analytical skills. You demonstrate advanced logical-mathematical induction patterns and sharp problem-solving traits.";
+      if (score >= 140) {
+        rank = "Elite Mensa Candidate";
+        ratingDescription = "Top 1% score! Exceptional cognitive agility. You parsed advanced syllogisms, modular sequence changes, and complex temporal vectors flawlessly.";
+      } else if (score >= 130) {
+        rank = "Strong Mensa Competitor";
+        ratingDescription = "Top 2% score! You meet the theoretical threshold representing high-IQ society eligibility benchmarks.";
+      }
+
+      const getPercentile = (iq) => {
+        if (iq >= 140) return "99th";
+        if (iq >= 130) return "98th";
+        if (iq >= 120) return "91st";
+        if (iq >= 110) return "75th";
+        if (iq >= 100) return "50th";
+        return "25th";
+      };
+
+      const percentile = getPercentile(score);
+
+      const triggerPrint = () => {
+        document.getElementById('cert-user-name').innerText = userName.trim() || 'Distinguished Participant';
+        document.getElementById('cert-date').innerText = dateString;
+        document.getElementById('cert-iq-score').innerText = score;
+        document.getElementById('cert-percentile').innerText = `${percentile}th`;
+        window.print();
+      };
+
+      return (
+        <div className="max-w-4xl w-full py-4 space-y-8 animate-fade-in">
+          <div className="text-center space-y-2">
+            <h1 class="text-3xl md:text-5xl font-heading font-extrabold text-white">Mensa Practice Results</h1>
+            <p class="text-slate-400 text-sm">Generated on {dateString}</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+            <div className="md:col-span-5 bg-slate-900/60 border border-slate-800 rounded-3xl p-6 flex flex-col justify-center items-center text-center shadow-2xl">
+              <div className="relative w-48 h-48 flex items-center justify-center mb-6">
+                <svg viewBox="0 0 100 100" className="w-full h-full transform -rotate-90">
+                  <circle cx="50" cy="50" r="42" fill="transparent" stroke="#0f172a" strokeWidth="6" />
+                  <circle 
+                    cx="50" cy="50" r="42" fill="transparent" stroke="url(#scoreGradMS)" strokeWidth="8" 
+                    strokeDasharray="264" strokeDashoffset={264 - (264 * (score - 60)) / 90} 
+                    strokeLinecap="round" className="transition-all duration-1000"
+                  />
+                  <defs>
+                    <linearGradient id="scoreGradMS" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#a855f7" />
+                      <stop offset="100%" stopColor="#ec4899" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div className="absolute inset-0 flex flex-col justify-center items-center">
+                  <span className="text-xs uppercase font-extrabold tracking-widest text-slate-500">Mensa IQ</span>
+                  <span className="text-5xl font-heading font-black text-white mt-1">{score}</span>
+                  <span className="text-xs font-semibold text-purple-400 mt-0.5">{percentile} Percentile</span>
+                </div>
+              </div>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-brand-500/10 border border-brand-500/20 rounded-full text-xs font-bold text-brand-400 uppercase">
+                <Sparkles size={12} /> {rank}
+              </span>
+              <p className="text-xs text-slate-400 mt-3 max-w-xs">{ratingDescription}</p>
+            </div>
+
+            <div className="md:col-span-7 bg-slate-900/60 border border-slate-800 rounded-3xl p-6 md:p-8 space-y-6 flex flex-col justify-between shadow-2xl">
+              <div className="space-y-4">
+                <h3 className="font-heading font-bold text-white text-lg flex items-center gap-2">
+                  <BarChart3 size={18} className="text-purple-400" /> Mensa Complexity Score
+                </h3>
+                <p className="text-sm text-slate-400 leading-relaxed font-light">
+                  This score tracks your competence on advanced, high-percentile cognitive tasks. It is calculated based on factorial progression tracking, temporal angles, lexical rearrangements, and syllogistic structures.
+                </p>
+              </div>
+
+              <div className="pt-6 border-t border-slate-800 space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-slate-400 uppercase mb-1.5">Enter Name for Certificate</label>
+                  <input 
+                    type="text" className="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white text-sm"
+                    placeholder="Enter name" value={userName} onChange={(e) => setUserName(e.target.value)}
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <button 
+                    onClick={triggerPrint}
+                    className="w-full inline-flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white font-bold text-sm rounded-xl shadow-lg transition"
+                  >
+                    <Download size={16} /> Download My Certificate (PDF)
+                  </button>
+                  <button onClick={onReset} className="w-full py-3 bg-slate-950 border border-slate-800 text-slate-300 hover:bg-slate-900 rounded-xl transition text-sm font-semibold">
+                    Retake Test
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const rootEl = document.getElementById('root');
+    const root = ReactDOM.createRoot(rootEl);
+    root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
+  </script>
+  <!-- Mobile Menu Toggle Script -->
+  <script>
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', function() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
